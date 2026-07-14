@@ -437,17 +437,14 @@ ul.cv-list li {
     
     .page {
         margin: 0 !important;
+        padding: 20mm !important;
         border: none !important;
         border-radius: 0 !important;
         width: 210mm !important;
         min-height: 297mm !important;
         box-shadow: none !important;
         position: relative !important;
-    }
-    .cv-photo-container {
-        position: absolute !important;
-        top: 20mm !important;
-        right: 20mm !important;
+        box-sizing: border-box !important;
     }
 }
 
