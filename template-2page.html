@@ -26,20 +26,25 @@
     </div>
 
     <div class="page">
-        <!-- Photo -->
-        <div class="cv-photo-container" id="cv-photo" title="Click to upload photo">
-            <!-- Image tag will be injected here by JS -->
-        </div>
-        <input type="file" id="photo-upload" accept="image/*">
-
-        <!-- Header -->
-        <div class="header-content">
-            <h2 contenteditable="true" class="single-line">Curriculum Vitae</h2>
-            <h3 contenteditable="true" class="single-line">Of</h3>
-            <h1 class="cv-name single-line" contenteditable="true">ARIFUL ALAM</h1>
-            <p class="cv-header-text single-line" contenteditable="true">Faridgonj, Chandpur.</p>
-            <p class="cv-header-text single-line" contenteditable="true">Cell: +880 1834906807</p>
-            <p class="cv-header-text single-line" contenteditable="true"><a href="#">ksojib027@gmail.com</a></p>
+        <!-- Header Section (Flexbox to prevent print overlaps) -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <!-- Header Text -->
+            <div class="header-content" style="flex: 1; margin-bottom: 0; height: auto;">
+                <h2 contenteditable="true" class="single-line">Curriculum Vitae</h2>
+                <h3 contenteditable="true" class="single-line">Of</h3>
+                <h1 class="cv-name single-line" contenteditable="true">ARIFUL ALAM</h1>
+                <p class="cv-header-text single-line" contenteditable="true">Faridgonj, Chandpur.</p>
+                <p class="cv-header-text single-line" contenteditable="true">Cell: +880 1834906807</p>
+                <p class="cv-header-text single-line" contenteditable="true"><a href="#">ksojib027@gmail.com</a></p>
+            </div>
+            
+            <!-- Photo Box -->
+            <div style="margin-left: 20px;">
+                <div class="cv-photo-container" id="cv-photo" title="Click to upload photo" style="position: relative; top: 0; right: 0;">
+                    <!-- Image tag will be injected here by JS -->
+                </div>
+                <input type="file" id="photo-upload" accept="image/*">
+            </div>
         </div>
 
         <!-- Career Objectives -->
