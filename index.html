@@ -34,6 +34,52 @@
             <div class="hero-background"></div>
         </section>
 
+        <section id="import-section" style="background: #f8fafc; padding: 60px 0; border-bottom: 1px solid #e2e8f0;">
+            <div class="container">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 20px;">Import from LaTeX (Beta)</h2>
+                <p style="text-align: center; margin-bottom: 30px; color: #475569; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Already have a CV in LaTeX or plain text? Paste it below, select an API provider and a template, and our AI will automatically fill in the template for you!
+                </p>
+                <div style="max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px;">1. Paste your LaTeX or Text CV here:</label>
+                        <textarea id="import-text" style="width: 100%; height: 200px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: monospace; resize: vertical;" placeholder="\documentclass{article}..."></textarea>
+                    </div>
+                    
+                    <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px;">2. AI Provider:</label>
+                            <select id="import-provider" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                                <option value="gemini">Google Gemini (Recommended)</option>
+                                <option value="groq">Groq (Llama 3.3)</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px;">API Key:</label>
+                            <input type="password" id="import-api-key" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;" placeholder="Paste API Key here...">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px;">3. Select Target Template:</label>
+                        <select id="import-target" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                            <option value="template-1page.html">Classic Single Page</option>
+                            <option value="template-2page.html">Traditional 2-Page Standard</option>
+                            <option value="template-modern.html">Modern Two-Column</option>
+                            <option value="template-latex-1.html">LaTeX Style 1 (Classic Table)</option>
+                            <option value="template-latex-2.html">LaTeX Style 2 (Clean Sections)</option>
+                            <option value="template-fresher.html">Graduate & Fresher</option>
+                            <option value="template-custom.html" style="font-weight: bold; color: #4f46e5;">✨ Auto-Generate Custom HTML Layout</option>
+                            <option value="pdf-compiler" style="font-weight: bold; color: #dc2626;">📄 Compile directly to PDF (LaTeX Online)</option>
+                        </select>
+                    </div>
+
+                    <button id="btn-run-import" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 12px;">✨ Convert & Open Template</button>
+                    <div id="import-status" style="margin-top: 15px; text-align: center; color: #4f46e5; font-weight: 500; display: none;">Processing your CV... Please wait (this can take up to 20 seconds).</div>
+                </div>
+            </div>
+        </section>
+
         <section id="templates" class="templates-section">
             <div class="container">
                 <h2 class="section-title">For Freshers & Graduates (No Experience)</h2>
@@ -151,5 +197,6 @@
             <p>&copy; 2024 CV Builder. Build your future today.</p>
         </div>
     </footer>
+    <script src="js/import.js"></script>
 </body>
 </html>

@@ -1,4 +1,26 @@
-const initApp = () => {
+    // Check if we are importing a generated CV from index.html
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('import') === 'true') {
+        const importedHtml = sessionStorage.getItem('imported_cv_html');
+        if (importedHtml) {
+            const pageContainer = document.querySelector('.page');
+            if (pageContainer) {
+                // Ensure we inject ONLY the .page contents, or replace the whole page element
+                // The AI is instructed to return `<div class="page">...</div>`
+                // So we parse it and extract its innerHTML to be safe
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = importedHtml;
+                const importedPage = tempDiv.querySelector('.page') || tempDiv;
+                pageContainer.innerHTML = importedPage.innerHTML;
+            }
+            sessionStorage.removeItem('imported_cv_html'); // Clean up
+            
+            // Clean up the URL to hide the ?import=true parameter
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    }
+
+    const initApp = () => {
     // PDF Download Logic
     const downloadBtn = document.getElementById('download-pdf');
     if (downloadBtn) {
