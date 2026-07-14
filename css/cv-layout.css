@@ -1,0 +1,445 @@
+:root {
+    --cv-bg: #ffffff;
+    --cv-text: #000000;
+    --cv-text-muted: #444444;
+    --cv-border: #cccccc;
+    --cv-accent: #333333;
+    --font-cv: 'Arial', sans-serif;
+    --font-heading: 'Times New Roman', serif;
+}
+
+body {
+    background-color: #525659; /* PDF viewer typical background */
+    margin: 0;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-sans, sans-serif);
+}
+
+/* Toolbar (Not printed) */
+.cv-toolbar {
+    background: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: sticky;
+    top: 1rem;
+    z-index: 1000;
+}
+
+.btn-download {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-download:hover {
+    background-color: #4338ca;
+}
+
+.btn-back {
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+.btn-back:hover {
+    color: #111827;
+}
+
+/* A4 Page Container */
+.page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    margin: 0 auto 20mm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    position: relative;
+    color: var(--cv-text);
+    font-family: var(--font-cv);
+    font-size: 11pt;
+    line-height: 1.4;
+}
+
+/* Editable Elements */
+[contenteditable="true"] {
+    outline: none;
+    transition: background-color 0.2s;
+    border-radius: 2px;
+}
+
+[contenteditable="true"]:hover {
+    background-color: rgba(79, 70, 229, 0.1);
+    cursor: text;
+}
+
+[contenteditable="true"]:focus {
+    background-color: rgba(79, 70, 229, 0.05);
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+}
+
+/* Photo Upload */
+.cv-photo-container {
+    position: absolute;
+    top: 20mm;
+    right: 20mm;
+    width: 35mm;
+    height: 45mm;
+    border: 1px solid var(--cv-border);
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.cv-photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.cv-photo-container::after {
+    content: "Click to upload photo";
+    font-size: 0.75rem;
+    color: #9ca3af;
+    padding: 0.5rem;
+}
+
+.cv-photo-container.has-photo::after {
+    display: none;
+}
+
+.cv-photo-container.has-photo img {
+    display: block;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* Typography for CV */
+h1.cv-name {
+    font-size: 18pt;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+}
+
+.cv-header-text {
+    font-size: 10pt;
+    margin: 0;
+}
+
+.cv-section-title {
+    font-weight: bold;
+    font-size: 12pt;
+    background-color: #e5e5e5;
+    padding: 4px 8px;
+    margin: 15px 0 10px 0;
+    border: 1px solid var(--cv-border);
+}
+
+/* Tables in CV */
+.cv-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    font-size: 10pt;
+}
+
+.cv-table th, .cv-table td {
+    border: 1px solid var(--cv-border);
+    padding: 5px 8px;
+    vertical-align: top;
+}
+
+.cv-table-no-border {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cv-table-no-border td {
+    padding: 2px 0;
+    vertical-align: top;
+}
+
+.td-label {
+    width: 150px;
+    font-weight: bold;
+}
+
+.td-colon {
+    width: 10px;
+}
+
+ul.cv-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+ul.cv-list li {
+    margin-bottom: 4px;
+}
+
+/* Page Break support */
+.page-break {
+    page-break-before: always;
+}
+
+/* Print Styles */
+@media print {
+    body, .page {
+        margin: 0;
+        box-shadow: none;
+        border: none;
+        background: white;
+    }
+    
+    .page {
+        padding: 0; /* Let print settings handle margins if needed, or keep fixed if strictly exact */
+        width: 100%;
+        min-height: auto;
+    }
+
+    .cv-toolbar {
+        display: none !important;
+    }
+
+    [contenteditable="true"] {
+        border: none !important;
+        box-shadow: none !important;
+        background-color: transparent !important;
+    }
+
+    /* Force background colors to print */
+    .cv-section-title, .cv-photo-container {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+/* AI Chat Modal */
+.btn-ai {
+    background-color: #10b981; /* Emerald */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-ai:hover {
+    background-color: #059669;
+}
+
+#ai-chat-modal {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    z-index: 2000;
+    overflow: hidden;
+    transition: all 0.3s;
+    font-family: var(--font-sans, sans-serif);
+    border: 1px solid var(--border-color, #e5e7eb);
+}
+
+#ai-chat-modal.hidden {
+    display: none;
+}
+
+.ai-header {
+    background: #10b981;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.ai-header button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#ai-chat-messages {
+    height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ai-msg {
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 90%;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.ai-msg.user {
+    background: #e0e7ff;
+    color: #3730a3;
+    align-self: flex-end;
+}
+
+.ai-msg.bot {
+    background: white;
+    border: 1px solid #e5e7eb;
+    color: #111827;
+    align-self: flex-start;
+}
+
+.ai-msg pre {
+    background: #111827;
+    color: #f3f4f6;
+    padding: 8px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.ai-msg code {
+    font-family: monospace;
+}
+
+.ai-input-area {
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#ai-prompt {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 8px;
+    resize: none;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.ai-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-send {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-send:hover {
+    background: #4338ca;
+}
+
+#ai-api-key {
+    font-size: 0.8rem;
+    padding: 4px;
+    border: 1px solid #d1d5db;
+    border-radius: 2px;
+    width: 150px;
+}
+
+/* Context Menu for Deletion */
+#cv-context-menu {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ef4444;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10000;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #ef4444;
+    font-weight: bold;
+    font-family: sans-serif;
+    transition: background 0.2s;
+}
+
+#cv-context-menu:hover {
+    background: #fef2f2;
+}
+
+@media print {
+    #cv-context-menu {
+        display: none !important;
+    }
+    #cv-hover-delete {
+        display: none !important;
+    }
+}
+
+/* Floating Hover Delete Button */
+#cv-hover-delete {
+    display: none;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: #ef4444;
+    color: white;
+    text-align: center;
+    line-height: 22px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 9999;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border: 1px solid #b91c1c;
+}
+#cv-hover-delete:hover {
+    background: #dc2626;
+}

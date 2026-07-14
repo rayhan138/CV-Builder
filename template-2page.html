@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit CV - Traditional 2 Page</title>
+    <link rel="stylesheet" href="css/cv-layout.css">
+    <style>
+        /* Specific adjustments for this template if needed */
+        .header-content {
+            text-align: center;
+            margin-bottom: 20px;
+            min-height: 45mm; /* Prevents text below from overlapping with the absolute photo box */
+        }
+        .header-content h2 { margin: 0; font-size: 14pt; font-weight: normal; font-style: italic; }
+        .header-content h3 { margin: 0; font-size: 12pt; font-weight: normal; font-style: italic; }
+        .header-content a { color: blue; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="cv-toolbar">
+        <a href="index.html" class="btn-back">← Back to Templates</a>
+        <div style="flex-grow: 1;"></div>
+        <span style="font-size: 0.9rem; color: #666;">Click any text to edit</span>
+        <button id="download-pdf" class="btn-download">🖨️ Download PDF</button>
+    </div>
+
+    <div class="page">
+        <!-- Photo -->
+        <div class="cv-photo-container" id="cv-photo" title="Click to upload photo">
+            <!-- Image tag will be injected here by JS -->
+        </div>
+        <input type="file" id="photo-upload" accept="image/*">
+
+        <!-- Header -->
+        <div class="header-content">
+            <h2 contenteditable="true" class="single-line">Curriculum Vitae</h2>
+            <h3 contenteditable="true" class="single-line">Of</h3>
+            <h1 class="cv-name single-line" contenteditable="true">ARIFUL ALAM</h1>
+            <p class="cv-header-text single-line" contenteditable="true">Faridgonj, Chandpur.</p>
+            <p class="cv-header-text single-line" contenteditable="true">Cell: +880 1834906807</p>
+            <p class="cv-header-text single-line" contenteditable="true"><a href="#">ksojib027@gmail.com</a></p>
+        </div>
+
+        <!-- Career Objectives -->
+        <div class="cv-section-title" contenteditable="true" class="single-line">Career Objectives:</div>
+        <div style="border: 1px solid var(--cv-border); padding: 8px;">
+            <p contenteditable="true" style="margin: 0; text-align: justify;">Have a strong desire to work in a challenging environment where I can utilize my education and skills. Achieve this aim. I am determined to offer honesty, efficiency and sincerity to the optimum level.</p>
+        </div>
+
+        <!-- My Traits -->
+        <div class="cv-section-title" contenteditable="true" class="single-line">My Traits:</div>
+        <div style="background-color: #f5f5f5; padding: 8px;">
+            <ul class="cv-list" contenteditable="true">
+                <li>Energetic and can work under pressure.</li>
+                <li>Friendly and accommodating behavior.</li>
+                <li>Can work independently of as a member of any team.</li>
+                <li>Capable to be adapted in any type of environment.</li>
+                <li>Willing to relocate anywhere at home and aboard.</li>
+            </ul>
+        </div>
+
+        <!-- Educational Qualifications -->
+        <div class="cv-section-title" contenteditable="true" class="single-line">Educational Qualifications:</div>
+        
+        <table class="cv-table">
+            <tbody>
+                <tr>
+                    <td colspan="2"><strong contenteditable="true">Bachelor of Business Administration (BBA)</strong></td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;" contenteditable="true">Institute</td>
+                    <td contenteditable="true">: Chandpur govt college.</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Board</td>
+                    <td contenteditable="true">: National University</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Session</td>
+                    <td contenteditable="true">: 2018-2019</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Result</td>
+                    <td contenteditable="true">: 4th year running</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="cv-table">
+            <tbody>
+                <tr>
+                    <td colspan="2"><strong contenteditable="true">Higher Secondary Certificate (H.S.C)</strong></td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;" contenteditable="true">Institute</td>
+                    <td contenteditable="true">: Hajigonj Model College</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Board</td>
+                    <td contenteditable="true">: Technical Board</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Year</td>
+                    <td contenteditable="true">: 2018</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Result</td>
+                    <td contenteditable="true">: GPA: 4.54</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="cv-table">
+            <tbody>
+                <tr>
+                    <td colspan="2"><strong contenteditable="true">Secondary School Certificate (S.S.C)</strong></td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;" contenteditable="true">Institute</td>
+                    <td contenteditable="true">: Montala Hamedia High School</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Board</td>
+                    <td contenteditable="true">: Comilla</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Year</td>
+                    <td contenteditable="true">: 2016</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Result</td>
+                    <td contenteditable="true">: GPA: 3.67</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table class="cv-table">
+            <tbody>
+                <tr>
+                    <td colspan="2"><strong contenteditable="true">Junior School Certificate (J.S.C)</strong></td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;" contenteditable="true">Institute</td>
+                    <td contenteditable="true">: Montala Hamedia High School</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Board</td>
+                    <td contenteditable="true">: Comilla</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Year</td>
+                    <td contenteditable="true">: 2013</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Result</td>
+                    <td contenteditable="true">: GPA: 4.13</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> <!-- End Page 1 -->
+
+    <div class="page">
+        <!-- Language Proficiency -->
+        <div class="cv-section-title" contenteditable="true" class="single-line" style="width: 50%;">Language Proficiency:</div>
+        <div style="background-color: #f5f5f5; padding: 8px; width: 50%;">
+            <table class="cv-table-no-border">
+                <tr>
+                    <td class="td-label" contenteditable="true">Bangla</td>
+                    <td class="td-colon">:</td>
+                    <td contenteditable="true">Mother language</td>
+                </tr>
+                <tr>
+                    <td class="td-label" contenteditable="true">English</td>
+                    <td class="td-colon">:</td>
+                    <td contenteditable="true">Fluent in all respects</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Computer Literacy -->
+        <div class="cv-section-title" contenteditable="true" class="single-line">Computer Literacy:</div>
+        <div style="background-color: #f5f5f5; padding: 8px;">
+            <table class="cv-table-no-border">
+                <tr>
+                    <td class="td-label" contenteditable="true">Operating System</td>
+                    <td class="td-colon">:</td>
+                    <td contenteditable="true">Microsoft Windows XP, 7, 8 , 10</td>
+                </tr>
+                <tr>
+                    <td class="td-label" contenteditable="true">Application Software</td>
+                    <td class="td-colon">:</td>
+                    <td contenteditable="true">Microsoft Office, Microsoft Excel, Graphics Design, Photoshop</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="cv-section-title" contenteditable="true" class="single-line">Personal Information:</div>
+        <div style="background-color: #f5f5f5; padding: 12px;">
+            <table class="cv-table-no-border" style="line-height: 1.8;">
+                <tr><td class="td-label" contenteditable="true">Name</td><td class="td-colon">:</td><td contenteditable="true"><strong>Ariful Alam</strong></td></tr>
+                <tr><td class="td-label" contenteditable="true">Father’s Name</td><td class="td-colon">:</td><td contenteditable="true">Md. Khorshed Alam</td></tr>
+                <tr><td class="td-label" contenteditable="true">Mother’s Name</td><td class="td-colon">:</td><td contenteditable="true">Momtaz Beguam</td></tr>
+                <tr><td class="td-label" contenteditable="true">Present Address</td><td class="td-colon">:</td><td contenteditable="true">Tajmohal Villa, Madrasha rood, Chandpur Sadar, Chandpur.</td></tr>
+                <tr><td class="td-label" contenteditable="true">Permanent Address</td><td class="td-colon">:</td><td contenteditable="true">Vill. Manuri (Khan Bari) , P.O. Ghonia, P.S. Faridgonj, District : Chandpur.</td></tr>
+                <tr><td class="td-label" contenteditable="true">Date of Birth</td><td class="td-colon">:</td><td contenteditable="true">20 Oct, 2000</td></tr>
+                <tr><td class="td-label" contenteditable="true">Place of Birth</td><td class="td-colon">:</td><td contenteditable="true">Faridgonj</td></tr>
+                <tr><td class="td-label" contenteditable="true">Nationality</td><td class="td-colon">:</td><td contenteditable="true">Bangladeshi (By birth)</td></tr>
+                <tr><td class="td-label" contenteditable="true">Religion</td><td class="td-colon">:</td><td contenteditable="true">Islam</td></tr>
+                <tr><td class="td-label" contenteditable="true">Sex</td><td class="td-colon">:</td><td contenteditable="true">Male</td></tr>
+                <tr><td class="td-label" contenteditable="true">Blood Group</td><td class="td-colon">:</td><td contenteditable="true">(O+)</td></tr>
+                <tr><td class="td-label" contenteditable="true">Height & Weight</td><td class="td-colon">:</td><td contenteditable="true">H- 5′ 7″ & W- 60 Kg</td></tr>
+            </table>
+        </div>
+
+        <!-- Extra Curriculum Activities -->
+        <div class="cv-section-title" contenteditable="true" class="single-line" style="width: 60%;">Extra Curriculum Activities:</div>
+        <div style="border: 1px solid var(--cv-border); padding: 8px; width: 60%;">
+            <ul class="cv-list" contenteditable="true">
+                <li>Swimming.</li>
+                <li>Drawing.</li>
+                <li>Cultivate fish in a case</li>
+                <li>Playing Football, Cricket, Chase, Boxing etc.</li>
+                <li>Travelling</li>
+            </ul>
+        </div>
+
+        <!-- Experience -->
+        <div class="cv-section-title" contenteditable="true" class="single-line">Experience :</div>
+        <div style="border: 1px solid var(--cv-border); padding: 8px;">
+            <ul class="cv-list" contenteditable="true">
+                <li>I have 7 months working experience in Halima Electric.</li>
+                <li>Currently I have been working as a seller of graphic design, t-shirt design in Fiberr, Freelancer, Design Hill, Design Crowd market places for 3 years.</li>
+            </ul>
+        </div>
+
+        <!-- Referee -->
+        <div class="cv-section-title" contenteditable="true" class="single-line" style="width: 40%; background-color: #d1d5db;">Referee:</div>
+        <div style="background-color: #f3f4f6; padding: 12px; width: 40%;">
+            <strong contenteditable="true">Md. ABUL KALAM AZAD</strong><br>
+            <span contenteditable="true">Associate Professor.</span><br>
+            <span contenteditable="true">Department Of Mathematics</span><br>
+            <span contenteditable="true">Chandpur Govt. College.</span><br>
+            <strong contenteditable="true">Cell. 01718-064151</strong>
+            
+            <br><br>
+            
+            <strong contenteditable="true">M. Mustafa Zaman</strong><br>
+            <span contenteditable="true">Principal</span><br>
+            <span contenteditable="true">Gulshan Model School & College</span><br>
+            <span contenteditable="true">Road 86, Gulshan 2, Dhaka-1212</span><br>
+            <strong contenteditable="true">Phone: 9899852 , Office:8837171</strong><br>
+            <span contenteditable="true">Email: gmsc1972@gmail.com</span>
+        </div>
+
+        <!-- Signature -->
+        <div style="margin-top: 40px;">
+            <strong contenteditable="true">Signature</strong>
+            <br><br><br>
+            .................................................<br>
+            <strong contenteditable="true">Md. Ariful Alam</strong><br>
+            <strong contenteditable="true">Date:</strong>
+        </div>
+
+    </div> <!-- End Page 2 -->
+
+    <script src="js/app.js"></script>
+</body>
+</html>

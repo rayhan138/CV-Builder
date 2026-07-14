@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit CV - Fresher / Graduate</title>
+    <link rel="stylesheet" href="css/cv-layout.css">
+    <style>
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .header-text { flex-grow: 1; }
+        .header-text h1 { font-size: 24pt; margin: 0 0 5px 0; color: #333; }
+        .header-text p { margin: 2px 0; font-size: 10pt; }
+        
+        .cv-photo-container {
+            position: relative;
+            top: 0;
+            right: 0;
+            margin-left: 20px;
+        }
+        
+        .section { margin-bottom: 15px; }
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding-bottom: 2px;
+            text-transform: uppercase;
+        }
+        
+        .job-item { margin-bottom: 10px; }
+        .job-header { display: flex; justify-content: space-between; font-weight: bold; }
+        .job-title { font-style: italic; color: #555; }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0;
+            list-style: none;
+        }
+        .skill-list li {
+            background: #eee;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-toolbar">
+        <a href="index.html" class="btn-back">← Back to Templates</a>
+        <div style="flex-grow: 1;"></div>
+        <span style="font-size: 0.9rem; color: #666;">Click any text to edit | Right-click to delete items</span>
+        <button id="download-pdf" class="btn-download">🖨️ Download PDF</button>
+    </div>
+
+    <div class="page">
+        <!-- Header -->
+        <div class="cv-header">
+            <div class="header-text">
+                <h1 contenteditable="true" class="single-line">JOHN DOE</h1>
+                <p contenteditable="true" class="single-line" style="font-size: 12pt; font-style: italic; color: #666;">Recent Graduate / Entry Level Professional</p>
+                <p contenteditable="true" class="single-line" style="margin-top: 10px;">📍 123 Main Street, Dhaka, Bangladesh</p>
+                <p contenteditable="true" class="single-line">📞 +880 1711 000000 | ✉️ john.doe@email.com</p>
+                <p contenteditable="true" class="single-line">🔗 linkedin.com/in/johndoe | 💻 github.com/johndoe</p>
+            </div>
+            
+            <div class="cv-photo-container" id="cv-photo" title="Click to upload photo" style="width: 30mm; height: 35mm;">
+                <!-- Image tag will be injected here by JS -->
+            </div>
+            <input type="file" id="photo-upload" accept="image/*">
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <div class="section-title" contenteditable="true" class="single-line">Career Objective</div>
+            <p contenteditable="true" style="text-align: justify; margin: 0;">A highly motivated and enthusiastic recent graduate seeking an entry-level position where I can apply my academic knowledge and problem-solving skills to contribute to the company's goals while continuously learning and growing as a professional.</p>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <div class="section-title" contenteditable="true" class="single-line">Education</div>
+            
+            <div class="job-item">
+                <div class="job-header">
+                    <span contenteditable="true">B.Sc. in Computer Science & Engineering</span>
+                    <span contenteditable="true">2020 – 2024</span>
+                </div>
+                <div class="job-title" contenteditable="true">University of Dhaka, CGPA: 3.8/4.0</div>
+                <ul class="cv-list" contenteditable="true">
+                    <li>Relevant Coursework: Data Structures, Algorithms, Software Engineering, Database Management.</li>
+                    <li>Thesis Topic: AI-Driven Healthcare Application for Rural Areas.</li>
+                </ul>
+            </div>
+            
+            <div class="job-item">
+                <div class="job-header">
+                    <span contenteditable="true">Higher Secondary Certificate (H.S.C) - Science</span>
+                    <span contenteditable="true">2017 – 2019</span>
+                </div>
+                <div class="job-title" contenteditable="true">Dhaka College, GPA: 5.0/5.0</div>
+            </div>
+        </div>
+
+        <!-- Academic Projects -->
+        <div class="section">
+            <div class="section-title" contenteditable="true" class="single-line">Academic Projects</div>
+            
+            <div class="job-item">
+                <div class="job-header">
+                    <span contenteditable="true">University Library Management System</span>
+                    <span contenteditable="true">Spring 2023</span>
+                </div>
+                <div class="job-title" contenteditable="true">Role: Lead Backend Developer | Tools: Node.js, MySQL</div>
+                <ul class="cv-list" contenteditable="true">
+                    <li>Developed a secure API to manage book lending and returns for students.</li>
+                    <li>Implemented user authentication and an automated email reminder system for due books.</li>
+                </ul>
+            </div>
+            
+            <div class="job-item">
+                <div class="job-header">
+                    <span contenteditable="true">E-Commerce Website Frontend</span>
+                    <span contenteditable="true">Fall 2022</span>
+                </div>
+                <div class="job-title" contenteditable="true">Role: UI/UX Developer | Tools: React, Tailwind CSS</div>
+                <ul class="cv-list" contenteditable="true">
+                    <li>Designed and implemented a fully responsive single-page e-commerce template.</li>
+                    <li>Integrated a shopping cart functionality using local storage.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Extracurricular Activities -->
+        <div class="section">
+            <div class="section-title" contenteditable="true" class="single-line">Extracurricular Activities</div>
+            <ul class="cv-list" contenteditable="true">
+                <li><strong>General Member, University IT Club:</strong> Organized a national-level programming contest hosting over 500 participants.</li>
+                <li><strong>Volunteer, Red Crescent Society:</strong> Participated in winter clothes distribution drives and blood donation campaigns.</li>
+            </ul>
+        </div>
+        
+        <!-- Skills -->
+        <div class="section">
+            <div class="section-title" contenteditable="true" class="single-line">Core Skills</div>
+            <ul class="skill-list" contenteditable="true">
+                <li>Problem Solving</li>
+                <li>C / C++</li>
+                <li>JavaScript (ES6+)</li>
+                <li>HTML5 & CSS3</li>
+                <li>Teamwork</li>
+                <li>Presentation Skills</li>
+                <li>Adaptability</li>
+            </ul>
+        </div>
+
+    </div> <!-- End Page 1 -->
+
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit CV - 1 Page Classic</title>
+    <link rel="stylesheet" href="css/cv-layout.css">
+    <style>
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .header-text { flex-grow: 1; }
+        .header-text h1 { font-size: 24pt; margin: 0 0 5px 0; color: #333; }
+        .header-text p { margin: 2px 0; font-size: 10pt; }
+        
+        .cv-photo-container {
+            position: relative;
+            top: 0;
+            right: 0;
+            margin-left: 20px;
+        }
+        
+        .section { margin-bottom: 15px; }
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding-bottom: 2px;
+            text-transform: uppercase;
+        }
+        
+        .job-item { margin-bottom: 10px; }
+        .job-header { display: flex; justify-content: space-between; font-weight: bold; }
+        .job-title { font-style: italic; color: #555; }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0;
+            list-style: none;
+        }
+        .skill-list li {
+            background: #eee;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-toolbar">
+        <a href="index.html" class="btn-back">← Back to Templates</a>
+        <div style="flex-grow: 1;"></div>
+        <span style="font-size: 0.9rem; color: #666;">Click any text to edit</span>
+        <button id="download-pdf" class="btn-download">🖨️ Download PDF</button>
+    </div>
+
+    <div class="page">
+        <!-- Header -->
+        <div class="cv-header">
+            <div class="header-text">
+                <h1 contenteditable="true" class="single-line">JOHN DOE</h1>
+                <p contenteditable="true" class="single-line" style="font-size: 12pt; font-style: italic; color: #666;">Senior Software Engineer</p>
+                <p contenteditable="true" class="single-line" style="margin-top: 10px;">📍 123 Main Street, Dhaka, Bangladesh</p>
+                <p contenteditable="true" class="single-line">📞 +880 1711 000000 | ✉️ john.doe@email.com</p>
+                <p contenteditable="true" class="single-line">🔗 linkedin.com/in/johndoe | 💻 github.com/johndoe</p>
+            </div>
+            
+            <div class="cv-photo-container" id="cv-photo" title="Click to upload photo" style="width: 30mm; height: 35mm;">
+                <!-- Image tag will be injected here by JS -->
+            </div>
+            <input type="file" id="photo-upload" accept="image/*">
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <div class="section-title" contenteditable="true" class="single-line">Professional Summary</div>
+            <p contenteditable="true" style="text-align: justify; margin: 0;">Results-driven Software Engineer with 5+ years of experience in developing scalable web applications. Proven expertise in JavaScript, React, and Node.js. Adept at collaborating with cross-functional teams to deliver high-quality software solutions on time. Passionate about learning new technologies and improving system architecture.</p>
+        </div>
+
+        <!-- Experience -->
+        <div class="section">
+            <div class="section-title" contenteditable="true" class="single-line">Work Experience</div>
+            
+            <div class="job-item">
+                <div class="job-header">
+                    <span contenteditable="true">Tech Solutions Ltd, Dhaka</span>
+                    <span contenteditable="true">Jan 2021 – Present</span>
+                </div>
+                <div class="job-title" contenteditable="true">Senior Frontend Developer</div>
+                <ul class="cv-list" contenteditable="true">
+                    <li>Lead the development of the company's flagship React application, improving performance by 30%.</li>
+                    <li>Mentored a team of 3 junior developers and conducted regular code reviews.</li>
+                    <li>Integrated RESTful APIs and optimized state management using Redux Toolkit.</li>
+                </ul>
+            </div>
+            
+            <div class="job-item">
+                <div class="job-header">
+                    <span contenteditable="true">Creative IT, Dhaka</span>
+                    <span contenteditable="true">Jun 2018 – Dec 2020</span>
+                </div>
+                <div class="job-title" contenteditable="true">Web Developer</div>
+                <ul class="cv-list" contenteditable="true">
+                    <li>Developed responsive websites for multiple clients using HTML, CSS, and JavaScript.</li>
+                    <li>Collaborated with the design team to implement pixel-perfect user interfaces.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <div class="section-title" contenteditable="true" class="single-line">Education</div>
+            
+            <div class="job-item">
+                <div class="job-header">
+                    <span contenteditable="true">B.Sc. in Computer Science & Engineering</span>
+                    <span contenteditable="true">2014 – 2018</span>
+                </div>
+                <div class="job-title" contenteditable="true">University of Dhaka, CGPA: 3.8/4.0</div>
+            </div>
+        </div>
+        
+        <!-- Skills -->
+        <div class="section">
+            <div class="section-title" contenteditable="true" class="single-line">Core Skills</div>
+            <ul class="skill-list" contenteditable="true">
+                <li>JavaScript (ES6+)</li>
+                <li>React & Next.js</li>
+                <li>Node.js / Express</li>
+                <li>HTML5 & CSS3</li>
+                <li>MongoDB & MySQL</li>
+                <li>Git & GitHub</li>
+                <li>REST APIs</li>
+                <li>Tailwind CSS</li>
+            </ul>
+        </div>
+
+    </div> <!-- End Page 1 -->
+
+    <script src="js/app.js"></script>
+</body>
+</html>
