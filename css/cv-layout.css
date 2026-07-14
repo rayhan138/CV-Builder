@@ -414,11 +414,26 @@ ul.cv-list li {
 }
 
 @media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
     #cv-context-menu {
         display: none !important;
     }
     #cv-hover-delete {
         display: none !important;
+    }
+    
+    /* Ensure absolute positioned photo doesn't break flow in print */
+    .page {
+        position: relative !important;
+    }
+    .cv-photo-container {
+        position: absolute !important;
+        top: 20mm !important;
+        right: 20mm !important;
     }
 }
 
