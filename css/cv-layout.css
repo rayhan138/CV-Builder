@@ -414,21 +414,34 @@ ul.cv-list li {
 }
 
 @media print {
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+
     html, body, .page, .page *, div, p, span, h1, h2, h3, h4, h5, h6, table, th, td, ul, li {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
         color-adjust: exact !important;
     }
     
-    #cv-context-menu {
-        display: none !important;
-    }
-    #cv-hover-delete {
+    #cv-context-menu, #cv-hover-delete, .cv-toolbar {
         display: none !important;
     }
     
-    /* Ensure absolute positioned photo doesn't break flow in print */
     .page {
+        margin: 0 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        width: 210mm !important;
+        min-height: 297mm !important;
+        box-shadow: none !important;
         position: relative !important;
     }
     .cv-photo-container {
