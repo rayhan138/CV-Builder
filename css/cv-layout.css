@@ -431,7 +431,7 @@ ul.cv-list li {
         color-adjust: exact !important;
     }
     
-    #cv-context-menu, #cv-hover-delete, .cv-toolbar {
+    #cv-context-menu, #cv-hover-delete, .cv-toolbar, .add-btn {
         display: none !important;
     }
     
@@ -468,4 +468,28 @@ ul.cv-list li {
 }
 #cv-hover-delete:hover {
     background: #dc2626;
+}
+
+/* Dynamic Add Button */
+.add-btn {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 10px auto;
+    padding: 8px 16px;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 1px dashed #d1d5db;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.add-btn:hover {
+    background-color: #e5e7eb;
+    color: #1f2937;
+    border-color: #9ca3af;
 }

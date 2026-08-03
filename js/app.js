@@ -31,7 +31,7 @@ const initApp = () => {
             });
 
             const opt = {
-                margin:       0,
+                margin:       [10, 0, 10, 0], // Top/Bottom margins so content doesn't hit the exact paper edge
                 filename:     fileName + '.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { 
@@ -41,7 +41,7 @@ const initApp = () => {
                     backgroundColor: '#ffffff'
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak:    { mode: ['css', 'legacy'] }
+                pagebreak:    { mode: ['css', 'legacy'], avoid: ['table', 'tr', '.cv-section-title', 'ul', '.header-content', '.cv-photo-container'] }
             };
 
             // Change button text to show progress
@@ -90,6 +90,33 @@ const initApp = () => {
             }
         });
     }
+
+    // Dynamic "Add Box" Logic
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('add-btn')) {
+            const btn = e.target;
+            // Find the previous element to clone (the table right above the button)
+            const targetToClone = btn.previousElementSibling;
+            
+            if (targetToClone) {
+                const clone = targetToClone.cloneNode(true);
+                
+                // Clear the text inside contenteditable fields in the clone
+                clone.querySelectorAll('[contenteditable]').forEach(el => {
+                    if (el.tagName.toLowerCase() === 'strong' || el.tagName.toLowerCase() === 'h3') {
+                        el.innerText = 'New Entry Title';
+                    } else if (el.innerText.trim().startsWith(':')) {
+                        el.innerText = ': ...';
+                    } else {
+                        el.innerText = '...';
+                    }
+                });
+                
+                // Insert the clone right before the button
+                btn.parentNode.insertBefore(clone, btn);
+            }
+        }
+    });
 
     // Optional: Prevent default Enter key behavior on single-line fields
     // to avoid messing up the layout
