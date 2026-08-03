@@ -106,7 +106,7 @@ const initApp = () => {
 
     // Dynamic "Add Box" Logic
     document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('add-btn')) {
+        if (e.target.classList.contains('add-btn') && !e.target.hasAttribute('onclick')) {
             const btn = e.target;
             // Find the previous element to clone (the table right above the button)
             const targetToClone = btn.previousElementSibling;
