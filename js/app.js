@@ -1,11 +1,66 @@
 const initApp = () => {
-    // PDF Download Logic
+    // PDF Download Logic using html2pdf.js for pixel-perfect rendering
     const downloadBtn = document.getElementById('download-pdf');
     if (downloadBtn) {
         downloadBtn.addEventListener('click', () => {
-            // Simply trigger the browser's native print dialog
-            // The @media print CSS handles the formatting
-            window.print();
+            // Hide the toolbar, delete buttons, and any edit outlines
+            const toolbar = document.querySelector('.cv-toolbar');
+            const hoverDelete = document.getElementById('cv-hover-delete');
+            const contextMenu = document.getElementById('cv-context-menu');
+            if (toolbar) toolbar.style.display = 'none';
+            if (hoverDelete) hoverDelete.style.display = 'none';
+            if (contextMenu) contextMenu.style.display = 'none';
+
+            // Remove contenteditable focus outlines temporarily
+            document.querySelectorAll('[contenteditable]').forEach(el => {
+                el.blur();
+            });
+
+            // Collect all .page elements
+            const pages = document.querySelectorAll('.page');
+            const fileName = document.title.replace('Edit CV - ', '').trim() || 'CV';
+
+            // Build a wrapper div containing all pages for multi-page support
+            const wrapper = document.createElement('div');
+            pages.forEach((page, index) => {
+                const clone = page.cloneNode(true);
+                if (index > 0) {
+                    clone.style.pageBreakBefore = 'always';
+                }
+                wrapper.appendChild(clone);
+            });
+
+            const opt = {
+                margin:       0,
+                filename:     fileName + '.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true,
+                    letterRendering: true,
+                    backgroundColor: '#ffffff'
+                },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak:    { mode: ['css', 'legacy'] }
+            };
+
+            // Change button text to show progress
+            const originalText = downloadBtn.innerHTML;
+            downloadBtn.innerHTML = '⏳ Generating PDF...';
+            downloadBtn.disabled = true;
+
+            html2pdf().set(opt).from(wrapper).save().then(() => {
+                // Restore UI
+                if (toolbar) toolbar.style.display = '';
+                downloadBtn.innerHTML = originalText;
+                downloadBtn.disabled = false;
+            }).catch(err => {
+                console.error('PDF generation failed:', err);
+                alert('PDF generation failed. Please try again.');
+                if (toolbar) toolbar.style.display = '';
+                downloadBtn.innerHTML = originalText;
+                downloadBtn.disabled = false;
+            });
         });
     }
 
