@@ -1,85 +1,131 @@
 const initApp = () => {
-    // PDF Download Logic using html2pdf.js for pixel-perfect rendering
     const downloadBtn = document.getElementById('download-pdf');
     if (downloadBtn) {
-        downloadBtn.addEventListener('click', () => {
-            // Hide the toolbar, delete buttons, and any edit outlines
+        downloadBtn.addEventListener('click', async () => {
             const toolbar = document.querySelector('.cv-toolbar');
             const hoverDelete = document.getElementById('cv-hover-delete');
             const contextMenu = document.getElementById('cv-context-menu');
-            const extraButtons = document.querySelectorAll('.add-btn, .close-btn');
-            
+            const extraButtons = document.querySelectorAll('.add-btn, .close-btn, .no-print');
+
             if (toolbar) toolbar.style.display = 'none';
             if (hoverDelete) hoverDelete.style.display = 'none';
             if (contextMenu) contextMenu.style.display = 'none';
             extraButtons.forEach(btn => btn.style.display = 'none');
 
-            // Remove contenteditable focus outlines temporarily
-            document.querySelectorAll('[contenteditable]').forEach(el => {
-                el.blur();
-            });
+            document.querySelectorAll('[contenteditable]').forEach(el => el.blur());
 
-            // Collect all .page elements and prep them for perfect 1:1 capture
-            const pages = document.querySelectorAll('.page');
+            const pages = Array.from(document.querySelectorAll('.page'));
             const fileName = document.title.replace('Edit CV - ', '').trim() || 'CV';
 
-            const wrapper = document.createElement('div');
-            pages.forEach((page, index) => {
-                const clone = page.cloneNode(true);
-                // Strip screen-only decorations
-                clone.style.margin = '0';
-                clone.style.border = 'none';
-                clone.style.boxShadow = 'none';
-                clone.style.borderRadius = '0';
-                // Force EXACTLY one A4 page height — no more, no less
-                clone.style.width = '210mm';
-                clone.style.height = '297mm';
-                clone.style.maxHeight = '297mm';
-                clone.style.minHeight = '297mm';
-                clone.style.overflow = 'hidden';
-                
-                if (index > 0) {
-                    clone.style.pageBreakBefore = 'always';
-                }
-                wrapper.appendChild(clone);
-            });
-
-            const opt = {
-                margin:       0, // Zero margins ensures exact 1:1 scale with the 210x297mm .page container
-                filename:     fileName + '.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { 
-                    scale: 2, 
-                    useCORS: true,
-                    letterRendering: true,
-                    backgroundColor: '#ffffff',
-                    scrollY: 0,
-                    windowY: 0
-                },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                // Only avoid breaking individual rows/items, NOT entire tables/lists, to prevent massive empty gaps
-                pagebreak:    { mode: ['css', 'legacy'], avoid: ['tr', 'li', '.cv-section-title', '.purple-header', '.cv-photo-container'] }
+            const restoreUI = () => {
+                if (toolbar) toolbar.style.display = '';
+                extraButtons.forEach(btn => btn.style.display = '');
             };
 
-            // Change button text to show progress
+            if (!pages.length) {
+                alert('No CV page found to download.');
+                restoreUI();
+                return;
+            }
+
             const originalText = downloadBtn.innerHTML;
-            downloadBtn.innerHTML = '⏳ Generating PDF...';
+            downloadBtn.innerHTML = 'Generating PDF...';
             downloadBtn.disabled = true;
 
-            html2pdf().set(opt).from(wrapper).save().then(() => {
-                // Restore UI
-                if (toolbar) toolbar.style.display = '';
-                extraButtons.forEach(btn => btn.style.display = '');
+            const createA4CaptureFrame = (sourcePage) => {
+                const frame = document.createElement('div');
+                Object.assign(frame.style, {
+                    position: 'fixed',
+                    left: '-10000px',
+                    top: '0',
+                    width: '210mm',
+                    height: '297mm',
+                    margin: '0',
+                    padding: '0',
+                    overflow: 'hidden',
+                    background: '#ffffff',
+                    boxSizing: 'border-box',
+                    zIndex: '-1'
+                });
+
+                const clone = sourcePage.cloneNode(true);
+                clone.querySelectorAll('.no-print, .add-btn, .close-btn, #cv-hover-delete, #cv-context-menu').forEach(el => el.remove());
+                clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+
+                Object.assign(clone.style, {
+                    position: 'absolute',
+                    top: '0',
+                    left: '0',
+                    margin: '0',
+                    border: 'none',
+                    boxShadow: 'none',
+                    borderRadius: '0',
+                    width: '210mm',
+                    minHeight: '297mm',
+                    height: 'auto',
+                    maxHeight: 'none',
+                    overflow: 'visible',
+                    transformOrigin: 'top left',
+                    boxSizing: 'border-box'
+                });
+
+                frame.appendChild(clone);
+                document.body.appendChild(frame);
+
+                const frameWidth = frame.clientWidth;
+                const frameHeight = frame.clientHeight;
+                const cloneWidth = Math.max(clone.scrollWidth, clone.offsetWidth);
+                const cloneHeight = Math.max(clone.scrollHeight, clone.offsetHeight);
+                const scale = Math.min(1, frameWidth / cloneWidth, frameHeight / cloneHeight);
+
+                if (scale < 1) {
+                    const centeredLeft = Math.max(0, (frameWidth - (cloneWidth * scale)) / 2);
+                    clone.style.transform = `scale(${scale})`;
+                    clone.style.left = `${centeredLeft}px`;
+                }
+
+                return { frame, scale };
+            };
+
+            try {
+                const jsPDF = window.jspdf?.jsPDF || window.jsPDF;
+                if (!window.html2canvas || !jsPDF) {
+                    throw new Error('PDF libraries are not loaded yet. Please refresh the page and try again.');
+                }
+
+                const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait', compress: true });
+
+                for (const [index, page] of pages.entries()) {
+                    const { frame } = createA4CaptureFrame(page);
+                    const canvas = await html2canvas(frame, {
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: true,
+                        backgroundColor: '#ffffff',
+                        width: frame.offsetWidth,
+                        height: frame.offsetHeight,
+                        scrollX: 0,
+                        scrollY: 0,
+                        windowWidth: frame.offsetWidth,
+                        windowHeight: frame.offsetHeight
+                    });
+                    frame.remove();
+
+                    if (index > 0) pdf.addPage('a4', 'portrait');
+                    pdf.addImage(canvas.toDataURL('image/jpeg', 0.98), 'JPEG', 0, 0, 210, 297);
+                }
+
+                pdf.save(fileName + '.pdf');
+                restoreUI();
                 downloadBtn.innerHTML = originalText;
                 downloadBtn.disabled = false;
-            }).catch(err => {
+            } catch (err) {
                 console.error('PDF generation failed:', err);
                 alert('PDF generation failed. Please try again.');
-                if (toolbar) toolbar.style.display = '';
-                extraButtons.forEach(btn => btn.style.display = '');
+                restoreUI();
                 downloadBtn.innerHTML = originalText;
                 downloadBtn.disabled = false;
-            });
+            }
         });
     }
 
@@ -167,7 +213,7 @@ function initAIAssistant() {
     // 1. Inject Ask AI Button
     const askBtn = document.createElement('button');
     askBtn.className = 'btn-ai';
-    askBtn.innerHTML = '✨ Ask AI';
+    askBtn.innerHTML = 'Ask AI';
     // Insert before download button
     const downloadBtn = document.getElementById('download-pdf');
     toolbar.insertBefore(askBtn, downloadBtn);
@@ -249,6 +295,27 @@ function initAIAssistant() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     };
 
+    const parseGeminiReply = (data) => {
+        if (data.outputText) return data.outputText;
+        if (Array.isArray(data.output)) {
+            const text = data.output
+                .flatMap(item => item.content || item.parts || [])
+                .map(part => part.text || '')
+                .join('')
+                .trim();
+            if (text) return text;
+        }
+        return data.candidates?.[0]?.content?.parts?.map(part => part.text || '').join('').trim() || '';
+    };
+
+    const ensureSuccessfulResponse = async (response, provider) => {
+        const data = await response.json();
+        if (!response.ok || data.error) {
+            throw new Error(data.error?.message || `${provider} request failed with status ${response.status}`);
+        }
+        return data;
+    };
+
     sendBtn.addEventListener('click', async () => {
         const prompt = promptInput.value.trim();
         const apiKey = apiKeyInput.value.trim();
@@ -276,16 +343,21 @@ function initAIAssistant() {
             let botReply = '';
 
             if (provider === 'gemini') {
-                response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`, {
+                response = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-goog-api-key': apiKey
+                    },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: fullPrompt }] }]
+                        model: 'gemini-3.6-flash',
+                        input: {
+                            parts: [{ text: fullPrompt }]
+                        }
                     })
                 });
-                const data = await response.json();
-                if (data.error) throw new Error(data.error.message);
-                botReply = data.candidates[0].content.parts[0].text;
+                const data = await ensureSuccessfulResponse(response, 'Gemini');
+                botReply = parseGeminiReply(data);
             } else if (provider === 'groq') {
                 response = await fetch(`https://api.groq.com/openai/v1/chat/completions`, {
                     method: 'POST',
@@ -298,10 +370,11 @@ function initAIAssistant() {
                         messages: [{ role: 'user', content: fullPrompt }]
                     })
                 });
-                const data = await response.json();
-                if (data.error) throw new Error(data.error.message);
+                const data = await ensureSuccessfulResponse(response, 'Groq');
                 botReply = data.choices[0].message.content;
             }
+
+            if (!botReply) throw new Error('The AI provider returned an empty response.');
 
             chatMessages.lastChild.remove();
             addMessage(botReply, 'bot');
@@ -320,13 +393,13 @@ const initContextMenu = () => {
 
     const ctxMenu = document.createElement('div');
     ctxMenu.id = 'cv-context-menu';
-    ctxMenu.innerHTML = '🗑️ Delete Item';
+    ctxMenu.innerHTML = 'Delete Item';
     document.body.appendChild(ctxMenu);
 
     // Create the hover delete button
     const hoverBtn = document.createElement('div');
     hoverBtn.id = 'cv-hover-delete';
-    hoverBtn.innerHTML = '×';
+    hoverBtn.innerHTML = 'x';
     hoverBtn.title = 'Delete this item';
     document.body.appendChild(hoverBtn);
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit CV - 1 Page Classic</title>
-    <link rel="stylesheet" href="css/cv-layout.css">
+    <link rel="stylesheet" href="css/cv-layout.css?v=20260803-a4-fit">
     <style>
         .cv-header {
             display: flex;
@@ -57,10 +57,10 @@
 </head>
 <body>
     <div class="cv-toolbar">
-        <a href="index.html" class="btn-back">← Back to Templates</a>
+        <a href="index.html" class="btn-back">Back to Templates</a>
         <div style="flex-grow: 1;"></div>
         <span style="font-size: 0.9rem; color: #666;">Click any text to edit</span>
-        <button id="download-pdf" class="btn-download">🖨️ Download PDF</button>
+        <button id="download-pdf" class="btn-download">Download PDF</button>
     </div>
 
     <div class="page">
@@ -69,9 +69,9 @@
             <div class="header-text">
                 <h1 contenteditable="true" class="single-line">JOHN DOE</h1>
                 <p contenteditable="true" class="single-line" style="font-size: 12pt; font-style: italic; color: #666;">Senior Software Engineer</p>
-                <p contenteditable="true" class="single-line" style="margin-top: 10px;">📍 123 Main Street, Dhaka, Bangladesh</p>
-                <p contenteditable="true" class="single-line">📞 +880 1711 000000 | ✉️ john.doe@email.com</p>
-                <p contenteditable="true" class="single-line">🔗 linkedin.com/in/johndoe | 💻 github.com/johndoe</p>
+                <p contenteditable="true" class="single-line" style="margin-top: 10px;">Address: 123 Main Street, Dhaka, Bangladesh</p>
+                <p contenteditable="true" class="single-line">Phone: +880 1711 000000 | Email: john.doe@email.com</p>
+                <p contenteditable="true" class="single-line">LinkedIn: linkedin.com/in/johndoe | GitHub: github.com/johndoe</p>
             </div>
             
             <div class="cv-photo-container" id="cv-photo" title="Click to upload photo" style="width: 30mm; height: 35mm;">
@@ -93,7 +93,7 @@
             <div class="job-item">
                 <div class="job-header">
                     <span contenteditable="true">Tech Solutions Ltd, Dhaka</span>
-                    <span contenteditable="true">Jan 2021 – Present</span>
+                    <span contenteditable="true">Jan 2021 - Present</span>
                 </div>
                 <div class="job-title" contenteditable="true">Senior Frontend Developer</div>
                 <ul class="cv-list" contenteditable="true">
@@ -106,7 +106,7 @@
             <div class="job-item">
                 <div class="job-header">
                     <span contenteditable="true">Creative IT, Dhaka</span>
-                    <span contenteditable="true">Jun 2018 – Dec 2020</span>
+                    <span contenteditable="true">Jun 2018 - Dec 2020</span>
                 </div>
                 <div class="job-title" contenteditable="true">Web Developer</div>
                 <ul class="cv-list" contenteditable="true">
@@ -123,7 +123,7 @@
             <div class="job-item">
                 <div class="job-header">
                     <span contenteditable="true">B.Sc. in Computer Science & Engineering</span>
-                    <span contenteditable="true">2014 – 2018</span>
+                    <span contenteditable="true">2014 - 2018</span>
                 </div>
                 <div class="job-title" contenteditable="true">University of Dhaka, CGPA: 3.8/4.0</div>
             </div>
@@ -146,7 +146,8 @@
 
     </div> <!-- End Page 1 -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/app.js?v=20260803-a4-fit"></script>
 </body>
 </html>

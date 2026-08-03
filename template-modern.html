@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit CV - Modern 2 Column</title>
-    <link rel="stylesheet" href="css/cv-layout.css">
+    <link rel="stylesheet" href="css/cv-layout.css?v=20260803-a4-fit">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         .page {
@@ -16,25 +16,13 @@
             position: relative;
         }
 
-        .page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 35%;
-            background-color: #2c3e50;
-            z-index: 0;
-        }
-
         .sidebar {
             width: 35%;
-            background-color: transparent;
+            background-color: #2c3e50;
             color: white;
             padding: 30px 20px;
             box-sizing: border-box;
             position: relative;
-            z-index: 1;
         }
 
         .main-content {
@@ -42,7 +30,6 @@
             padding: 40px 30px;
             box-sizing: border-box;
             position: relative;
-            z-index: 1;
         }
 
         .cv-photo-container {
@@ -112,10 +99,10 @@
 </head>
 <body>
     <div class="cv-toolbar">
-        <a href="index.html" class="btn-back">← Back to Templates</a>
+        <a href="index.html" class="btn-back">Back to Templates</a>
         <div style="flex-grow: 1;"></div>
         <span style="font-size: 0.9rem; color: #666;">Click any text to edit</span>
-        <button id="download-pdf" class="btn-download">🖨️ Download PDF</button>
+        <button id="download-pdf" class="btn-download">Download PDF</button>
     </div>
 
     <div class="page">
@@ -128,10 +115,10 @@
 
             <div class="sidebar-section">
                 <div class="sidebar-title" contenteditable="true" class="single-line">Contact</div>
-                <div class="contact-item" contenteditable="true" class="single-line">📞 +880 1700 000000</div>
-                <div class="contact-item" contenteditable="true" class="single-line">✉️ hello@email.com</div>
-                <div class="contact-item" contenteditable="true" class="single-line">📍 Dhaka, Bangladesh</div>
-                <div class="contact-item" contenteditable="true" class="single-line">🔗 linkedin.com/in/name</div>
+                <div class="contact-item" contenteditable="true" class="single-line">Phone: +880 1700 000000</div>
+                <div class="contact-item" contenteditable="true" class="single-line">Email: hello@email.com</div>
+                <div class="contact-item" contenteditable="true" class="single-line">Address: Dhaka, Bangladesh</div>
+                <div class="contact-item" contenteditable="true" class="single-line">LinkedIn: linkedin.com/in/name</div>
             </div>
 
             <div class="sidebar-section">
@@ -148,17 +135,17 @@
 
             <div class="sidebar-section">
                 <div class="sidebar-title" contenteditable="true" class="single-line">Skills</div>
-                <div class="skill-item" contenteditable="true" class="single-line">• Digital Marketing</div>
-                <div class="skill-item" contenteditable="true" class="single-line">• SEO Optimization</div>
-                <div class="skill-item" contenteditable="true" class="single-line">• Content Strategy</div>
-                <div class="skill-item" contenteditable="true" class="single-line">• Data Analysis</div>
-                <div class="skill-item" contenteditable="true" class="single-line">• Project Management</div>
+                <div class="skill-item" contenteditable="true" class="single-line">- Digital Marketing</div>
+                <div class="skill-item" contenteditable="true" class="single-line">- SEO Optimization</div>
+                <div class="skill-item" contenteditable="true" class="single-line">- Content Strategy</div>
+                <div class="skill-item" contenteditable="true" class="single-line">- Data Analysis</div>
+                <div class="skill-item" contenteditable="true" class="single-line">- Project Management</div>
             </div>
             
             <div class="sidebar-section">
                 <div class="sidebar-title" contenteditable="true" class="single-line">Languages</div>
-                <div class="skill-item" contenteditable="true" class="single-line">• Bengali (Native)</div>
-                <div class="skill-item" contenteditable="true" class="single-line">• English (Fluent)</div>
+                <div class="skill-item" contenteditable="true" class="single-line">- Bengali (Native)</div>
+                <div class="skill-item" contenteditable="true" class="single-line">- English (Fluent)</div>
             </div>
         </div>
 
@@ -219,7 +206,8 @@
         </div>
     </div> <!-- End Page -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/app.js?v=20260803-a4-fit"></script>
 </body>
 </html>
