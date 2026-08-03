@@ -313,7 +313,8 @@ const initContextMenu = () => {
 
     let ctxTarget = null;
     let hoverTarget = null;
-    const deletableSelector = 'tr, li, .section-title, .cv-section-title, .main-title, .sidebar-title, .section, .job-item, .timeline-item, .exp-header, .cv-table-no-border, .cv-section-title + div';
+    // We added .page > div and column direct children so orphaned boxes can still be deleted even if their titles are gone
+    const deletableSelector = 'tr, li, .section-title, .cv-section-title, .main-title, .sidebar-title, .section, .job-item, .timeline-item, .exp-header, .cv-table-no-border, .editable-block, .page > div, .page > table, .left-column > div, .right-column > div, .left-col > div, .right-col > div, .main-content > div, .sidebar > div';
 
     const undoStack = [];
 
