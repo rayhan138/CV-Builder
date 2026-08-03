@@ -19,14 +19,19 @@ const initApp = () => {
                 el.blur();
             });
 
-            // Collect all .page elements
+            // Collect all .page elements and prep them for perfect 1:1 capture
             const pages = document.querySelectorAll('.page');
             const fileName = document.title.replace('Edit CV - ', '').trim() || 'CV';
 
-            // Build a wrapper div containing all pages for multi-page support
             const wrapper = document.createElement('div');
             pages.forEach((page, index) => {
                 const clone = page.cloneNode(true);
+                // Strip screen-only styles so it perfectly matches A4
+                clone.style.margin = '0';
+                clone.style.border = 'none';
+                clone.style.boxShadow = 'none';
+                clone.style.borderRadius = '0';
+                
                 if (index > 0) {
                     clone.style.pageBreakBefore = 'always';
                 }
@@ -34,7 +39,7 @@ const initApp = () => {
             });
 
             const opt = {
-                margin:       [10, 0, 10, 0], // Top/Bottom margins so content doesn't hit the exact paper edge
+                margin:       0, // Zero margins ensures exact 1:1 scale with the 210x297mm .page container
                 filename:     fileName + '.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { 
@@ -46,7 +51,8 @@ const initApp = () => {
                     windowY: 0
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak:    { mode: ['css', 'legacy'], avoid: ['table', 'tr', '.cv-section-title', 'ul', '.header-content', '.cv-photo-container'] }
+                // Only avoid breaking individual rows/items, NOT entire tables/lists, to prevent massive empty gaps
+                pagebreak:    { mode: ['css', 'legacy'], avoid: ['tr', 'li', '.cv-section-title', '.purple-header', '.cv-photo-container'] }
             };
 
             // Change button text to show progress
