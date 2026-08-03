@@ -7,9 +7,12 @@ const initApp = () => {
             const toolbar = document.querySelector('.cv-toolbar');
             const hoverDelete = document.getElementById('cv-hover-delete');
             const contextMenu = document.getElementById('cv-context-menu');
+            const extraButtons = document.querySelectorAll('.add-btn, .close-btn');
+            
             if (toolbar) toolbar.style.display = 'none';
             if (hoverDelete) hoverDelete.style.display = 'none';
             if (contextMenu) contextMenu.style.display = 'none';
+            extraButtons.forEach(btn => btn.style.display = 'none');
 
             // Remove contenteditable focus outlines temporarily
             document.querySelectorAll('[contenteditable]').forEach(el => {
@@ -38,7 +41,9 @@ const initApp = () => {
                     scale: 2, 
                     useCORS: true,
                     letterRendering: true,
-                    backgroundColor: '#ffffff'
+                    backgroundColor: '#ffffff',
+                    scrollY: 0,
+                    windowY: 0
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 pagebreak:    { mode: ['css', 'legacy'], avoid: ['table', 'tr', '.cv-section-title', 'ul', '.header-content', '.cv-photo-container'] }
@@ -52,12 +57,14 @@ const initApp = () => {
             html2pdf().set(opt).from(wrapper).save().then(() => {
                 // Restore UI
                 if (toolbar) toolbar.style.display = '';
+                extraButtons.forEach(btn => btn.style.display = '');
                 downloadBtn.innerHTML = originalText;
                 downloadBtn.disabled = false;
             }).catch(err => {
                 console.error('PDF generation failed:', err);
                 alert('PDF generation failed. Please try again.');
                 if (toolbar) toolbar.style.display = '';
+                extraButtons.forEach(btn => btn.style.display = '');
                 downloadBtn.innerHTML = originalText;
                 downloadBtn.disabled = false;
             });
