@@ -26,12 +26,17 @@ const initApp = () => {
             const wrapper = document.createElement('div');
             pages.forEach((page, index) => {
                 const clone = page.cloneNode(true);
-                // Strip screen-only styles so it perfectly matches A4
+                // Strip screen-only decorations
                 clone.style.margin = '0';
                 clone.style.border = 'none';
                 clone.style.boxShadow = 'none';
                 clone.style.borderRadius = '0';
-                clone.style.minHeight = '296mm'; // Prevent subpixel overflow causing blank pages
+                // Force EXACTLY one A4 page height — no more, no less
+                clone.style.width = '210mm';
+                clone.style.height = '297mm';
+                clone.style.maxHeight = '297mm';
+                clone.style.minHeight = '297mm';
+                clone.style.overflow = 'hidden';
                 
                 if (index > 0) {
                     clone.style.pageBreakBefore = 'always';
