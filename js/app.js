@@ -31,6 +31,7 @@ const initApp = () => {
                 clone.style.border = 'none';
                 clone.style.boxShadow = 'none';
                 clone.style.borderRadius = '0';
+                clone.style.minHeight = '296mm'; // Prevent subpixel overflow causing blank pages
                 
                 if (index > 0) {
                     clone.style.pageBreakBefore = 'always';
