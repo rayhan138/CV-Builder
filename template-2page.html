@@ -7,14 +7,91 @@
     <link rel="stylesheet" href="css/cv-layout.css?v=20260803-a4-fit">
     <style>
         /* Specific adjustments for this template if needed */
+        .page {
+            height: 297mm;
+            min-height: 297mm;
+            padding: 12mm 16mm;
+            overflow: hidden;
+            font-size: 9pt;
+            line-height: 1.25;
+        }
+
+        .cv-section-title {
+            margin: 6px 0 4px 0;
+            padding: 3px 6px;
+            font-size: 9.5pt;
+        }
+
+        .cv-table {
+            margin-bottom: 4px;
+            font-size: 8.5pt;
+        }
+
+        .cv-table th,
+        .cv-table td {
+            padding: 2px 5px;
+        }
+
+        .cv-table-no-border td {
+            padding: 1px 0;
+        }
+
+        ul.cv-list li {
+            margin-bottom: 1px;
+        }
+
         .header-content {
             text-align: center;
-            margin-bottom: 20px;
-            height: 45mm; /* Changed from min-height: Prevents text below from overlapping in PDF print mode */
+            margin-bottom: 8px;
+            height: auto;
         }
-        .header-content h2 { margin: 0; font-size: 14pt; font-weight: normal; font-style: italic; }
-        .header-content h3 { margin: 0; font-size: 12pt; font-weight: normal; font-style: italic; }
+        .header-content h2 { margin: 0; font-size: 12pt; font-weight: normal; font-style: italic; }
+        .header-content h3 { margin: 0; font-size: 10pt; font-weight: normal; font-style: italic; }
         .header-content a { color: blue; text-decoration: underline; }
+
+        .traditional-page-1 .cv-photo-container {
+            width: 28mm;
+            height: 36mm;
+        }
+
+        .traditional-page-1 .cv-name {
+            font-size: 16pt;
+        }
+
+        .traditional-page-2 .cv-section-title,
+        .traditional-page-2 div[style*="width"] {
+            width: 100% !important;
+        }
+
+        .traditional-page-2,
+        .traditional-page-2 * {
+            box-sizing: border-box;
+            overflow-wrap: anywhere;
+        }
+
+        .traditional-page-2 table[style*="line-height"] {
+            line-height: 1.28 !important;
+        }
+
+        .traditional-page-2 .td-label {
+            width: 135px;
+        }
+
+        .traditional-page-2 .compact-box {
+            padding: 6px !important;
+        }
+
+        .traditional-referees {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 8pt;
+            line-height: 1.18;
+        }
+
+        .traditional-signature {
+            margin-top: 14px !important;
+        }
     </style>
 </head>
 <body>
@@ -25,9 +102,9 @@
         <button id="download-pdf" class="btn-download">Download PDF</button>
     </div>
 
-    <div class="page">
+    <div class="page traditional-page-1">
         <!-- Header Section (Flexbox to prevent print overlaps) -->
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
             <!-- Header Text -->
             <div class="header-content" style="flex: 1; margin-bottom: 0; height: auto;">
                 <h2 contenteditable="true" class="single-line">Curriculum Vitae</h2>
@@ -168,10 +245,10 @@
 
     </div> <!-- End Page 1 -->
 
-    <div class="page">
+    <div class="page traditional-page-2">
         <!-- Language Proficiency -->
         <div class="cv-section-title" contenteditable="true" class="single-line" style="width: 50%;">Language Proficiency:</div>
-        <div style="background-color: #f5f5f5; padding: 8px; width: 50%;">
+        <div class="compact-box" style="background-color: #f5f5f5; padding: 8px; width: 50%;">
             <table class="cv-table-no-border">
                 <tr>
                     <td class="td-label" contenteditable="true">Bangla</td>
@@ -188,7 +265,7 @@
 
         <!-- Computer Literacy -->
         <div class="cv-section-title" contenteditable="true" class="single-line">Computer Literacy:</div>
-        <div style="background-color: #f5f5f5; padding: 8px;">
+        <div class="compact-box" style="background-color: #f5f5f5; padding: 8px;">
             <table class="cv-table-no-border">
                 <tr>
                     <td class="td-label" contenteditable="true">Operating System</td>
@@ -205,7 +282,7 @@
 
         <!-- Personal Information -->
         <div class="cv-section-title" contenteditable="true" class="single-line">Personal Information:</div>
-        <div style="background-color: #f5f5f5; padding: 12px;">
+        <div class="compact-box" style="background-color: #f5f5f5; padding: 12px;">
             <table class="cv-table-no-border" style="line-height: 1.8;">
                 <tr><td class="td-label" contenteditable="true">Name</td><td class="td-colon">:</td><td contenteditable="true"><strong>Ariful Alam</strong></td></tr>
                 <tr><td class="td-label" contenteditable="true">Father's Name</td><td class="td-colon">:</td><td contenteditable="true">Md. Khorshed Alam</td></tr>
@@ -224,7 +301,7 @@
 
         <!-- Extra Curriculum Activities -->
         <div class="cv-section-title" contenteditable="true" class="single-line" style="width: 60%;">Extra Curriculum Activities:</div>
-        <div style="border: 1px solid var(--cv-border); padding: 8px; width: 60%;">
+        <div class="compact-box" style="border: 1px solid var(--cv-border); padding: 8px; width: 60%;">
             <ul class="cv-list" contenteditable="true">
                 <li>Swimming.</li>
                 <li>Drawing.</li>
@@ -236,7 +313,7 @@
 
         <!-- Experience -->
         <div class="cv-section-title" contenteditable="true" class="single-line">Experience :</div>
-        <div style="border: 1px solid var(--cv-border); padding: 8px;">
+        <div class="compact-box" style="border: 1px solid var(--cv-border); padding: 8px;">
             <ul class="cv-list" contenteditable="true">
                 <li>I have 7 months working experience in Halima Electric.</li>
                 <li>Currently I have been working as a seller of graphic design, t-shirt design in Fiberr, Freelancer, Design Hill, Design Crowd market places for 3 years.</li>
@@ -245,25 +322,26 @@
 
         <!-- Referee -->
         <div class="cv-section-title" contenteditable="true" class="single-line" style="width: 40%; background-color: #d1d5db;">Referee:</div>
-        <div style="background-color: #f3f4f6; padding: 12px; width: 40%;">
-            <strong contenteditable="true">Md. ABUL KALAM AZAD</strong><br>
-            <span contenteditable="true">Associate Professor.</span><br>
-            <span contenteditable="true">Department Of Mathematics</span><br>
-            <span contenteditable="true">Chandpur Govt. College.</span><br>
-            <strong contenteditable="true">Cell. 01718-064151</strong>
-            
-            <br><br>
-            
-            <strong contenteditable="true">M. Mustafa Zaman</strong><br>
-            <span contenteditable="true">Principal</span><br>
-            <span contenteditable="true">Gulshan Model School & College</span><br>
-            <span contenteditable="true">Road 86, Gulshan 2, Dhaka-1212</span><br>
-            <strong contenteditable="true">Phone: 9899852 , Office:8837171</strong><br>
-            <span contenteditable="true">Email: gmsc1972@gmail.com</span>
+        <div class="compact-box traditional-referees" style="background-color: #f3f4f6; padding: 12px; width: 40%;">
+            <div>
+                <strong contenteditable="true">Md. ABUL KALAM AZAD</strong><br>
+                <span contenteditable="true">Associate Professor.</span><br>
+                <span contenteditable="true">Department Of Mathematics</span><br>
+                <span contenteditable="true">Chandpur Govt. College.</span><br>
+                <strong contenteditable="true">Cell. 01718-064151</strong>
+            </div>
+            <div>
+                <strong contenteditable="true">M. Mustafa Zaman</strong><br>
+                <span contenteditable="true">Principal</span><br>
+                <span contenteditable="true">Gulshan Model School & College</span><br>
+                <span contenteditable="true">Road 86, Gulshan 2, Dhaka-1212</span><br>
+                <strong contenteditable="true">Phone: 9899852, Office: 8837171</strong><br>
+                <span contenteditable="true">Email: gmsc1972@gmail.com</span>
+            </div>
         </div>
 
         <!-- Signature -->
-        <div style="margin-top: 40px;">
+        <div class="traditional-signature" style="margin-top: 40px;">
             <strong contenteditable="true">Signature</strong>
             <br><br><br>
             .................................................<br>
